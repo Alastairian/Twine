@@ -1,8 +1,10 @@
 import torch
+import argparse
 from pathos_core import PathosMatrixOrchestrator
 from lagos_marix import LogosMatrixOrchestrator
+from logger import log_decision
 
-def run_twine_cognition(sensory_data):
+def run_twine_cognition(sensory_data, scenario):
     print("\n=== Twine Cognition Prototype ===\n")
     logos = LogosMatrixOrchestrator()
     pathos = PathosMatrixOrchestrator(sensory_input_size=sensory_data.shape[1])
@@ -17,17 +19,30 @@ def run_twine_cognition(sensory_data):
     final_plan = logos.adjust_plan_with_pathos_guidance(intuitive_markers)
     print("\n--- Final Decision ---")
     print(final_plan)
+
+    # Log the run
+    log_decision(scenario, sensory_data, final_plan)
     return final_plan
 
 if __name__ == "__main__":
-    # Example: Routine scenario
-    routine_data = torch.rand(1, 10) * 0.2
-    print("SCENARIO: Routine Situation")
-    run_twine_cognition(routine_data)
+    parser = argparse.ArgumentParser(description="Twine Cognition CLI")
+    parser.add_argument("--scenario", choices=["routine", "urgent", "custom"], default="routine")
+    parser.add_argument("--custom_data", nargs=10, type=float, help="10 float values for custom sensory input")
+    args = parser.parse_args()
 
-    # Example: Urgent scenario
-    danger_data = torch.rand(1, 10)
-    danger_data[0, 3] = 0.95
-    danger_data[0, 8] = 0.99
-    print("\nSCENARIO: Urgent & Uncertain Situation")
-    run_twine_cognition(danger_data)
+    if args.scenario == "routine":
+        sensory_data = torch.rand(1, 10) * 0.2
+        print("SCENARIO: Routine Situation")
+    elif args.scenario == "urgent":
+        sensory_data = torch.rand(1, 10)
+        sensory_data[0, 3] = 0.95
+        sensory_data[0, 8] = 0.99
+        print("SCENARIO: Urgent & Uncertain Situation")
+    else:
+        if args.custom_data is None:
+            print("Please provide --custom_data with 10 float values.")
+            exit(1)
+        sensory_data = torch.tensor([args.custom_data])
+        print("SCENARIO: Custom")
+
+    run_twine_cognition(sensory_data, args.scenario)
