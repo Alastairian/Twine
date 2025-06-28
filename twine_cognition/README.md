@@ -44,7 +44,7 @@ twine_cognition/
 
 ## Custom Scenarios
 
-To try your own input, modify the data in `main.py` or create new test scenarios in `test_scenarios.py`.
+To try your own input, modify the data in `main.py` or create new test scenarios in a separate script.
 
 ---
 
