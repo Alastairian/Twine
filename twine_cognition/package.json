@@ -1,0 +1,12 @@
+{
+  "name": "twine-cognition",
+  "version": "1.0.0",
+  "description": "Twine Cognition project for Vercel deployment",
+  "scripts": {
+    "build": "echo 'No build step required'",
+    "start": "echo 'No start script required'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
