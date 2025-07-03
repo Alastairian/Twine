@@ -1,41 +1,21 @@
-# IAI-IPS Twine Cognition Prototype (Vercel Deployment)
+# Synapses Next.js Vercel Deployment
 
-This repo deploys the Twine Cognition Python API using Vercel serverless functions.
+This is a minimal Next.js app ready for Vercel deployment.
 
-## API Endpoint
+## Local Development
 
-After deploying, POST to `/api` with:
-
-```json
-{
-  "sensory_data": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-}
+```bash
+npm install
+npm run dev
 ```
 
-Receives:
+## Production Build
 
-```json
-{
-  "decision": ... # result from Twine Cognition
-}
+```bash
+npm run build
+npm start
 ```
 
-## Structure
+## Deploy to Vercel
 
-```
-api/
-  index.py              # Flask serverless function
-pathos_core.py          # Pathos Core (add your logic)
-lagos_marix.py          # Logos Core (add your logic)
-vercel.json             # Vercel config
-requirements.txt        # Python dependencies
-README.md
-```
-
-## Deploy Steps
-
-1. Push to GitHub.
-2. Import repo in [Vercel](https://vercel.com/).
-3. Deploy → Get your public API endpoint!
-
----
+Push this repo to GitHub and connect it to Vercel.
